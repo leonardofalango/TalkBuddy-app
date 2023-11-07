@@ -1,0 +1,43 @@
+# TalkBuddy
+
+RF1.
+    Videochamada com pessoas aleatorias no mesmo servidor
+
+    RNF1.
+        Videochamada criptografada de ponta a ponta (p2p) para segurança dos dados
+    RNF2.
+        Latência baixa (menos de 1 segundo de delay)
+    RNF3.
+        Conexão boa do servidor para evitar quedas
+    
+RF2.
+    Chatting com a mesma pessoa que esta na Videochamada conectada
+
+    RFN1.
+        Evitar desconexões
+    RFN2.
+        Receber notificações
+    RNF3.
+        Vizualizar historico de mensagens
+    
+RF3.
+    Denunciar os usuarios que está conectado com você
+
+    RNF1.
+        Perfil ser enviado para algum administrador para análise
+    RNF2.
+        Salvar o historico da videochamada e automaticamente enviar para o administrador
+
+RF4.
+    Salvar histórico de videochamadas
+
+    RNF1.
+        Poder Vizualizar o historico de videochamada gravados no servidor
+    RNF2.
+        Poder Vizualizar o historico de videochamada gravados no proprio aparelho
+
+RF5.
+    Colocar filtros durante a videochamada
+    
+    RNF1.
+        Não comprometer o desempenho da chamada
