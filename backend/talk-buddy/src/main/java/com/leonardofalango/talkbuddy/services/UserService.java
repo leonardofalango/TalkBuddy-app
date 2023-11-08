@@ -1,11 +1,13 @@
 package com.leonardofalango.talkbuddy.services;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.leonardofalango.talkbuddy.model.UserModel;
+import com.leonardofalango.talkbuddy.model.UserModel.Server;
 import com.leonardofalango.talkbuddy.repository.UserRepository;
 
 @Service
@@ -15,10 +17,6 @@ public class UserService {
 
     public UserModel save(UserModel userModel) {
         return this.userRepository.save(userModel);
-    }
-
-    public UserModel save(String id, String name, short age) {
-        return this.userRepository.save(new UserModel(id, name, age));
     }
 
     public List<UserModel> findAll() {
@@ -41,6 +39,27 @@ public class UserService {
         this.userRepository.deleteById(id);
 
         return deletedUser;
+    }
+
+    public List<UserModel> getAllUserInServer(Server server) {
+        return this.userRepository.findByServer(server);
+    }
+
+    public UserModel getRandomUserInServer(Server server) {
+        Random rand = new Random();
+        
+        UserModel randomUser = this
+            .userRepository
+            .findByServer(server)
+            .get(
+                rand.nextInt(
+                    this.userRepository
+                        .findByServer(server)
+                        .size()
+                )
+            );
+        
+        return randomUser;
     }
 
 }

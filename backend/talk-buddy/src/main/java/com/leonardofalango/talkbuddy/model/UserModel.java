@@ -1,5 +1,7 @@
 package com.leonardofalango.talkbuddy.model;
 
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,19 +14,29 @@ import lombok.Data;
 public class UserModel {
     @Id
     private String id;
-
     private String name;
+    private Date dob;
+    private String password;
+    private String email;
+    private String number;
+    private Address addres;
+    private Server server;
     
-    private short age;
+    public UserModel() {    }
 
-    public UserModel(String name, short age) {
-        this.age = age;
-        this.name = name;
+    @Data
+    public class Address {
+        private String neighboor;
+        private String country;
+        private String street;
+        private String number;
+        private String complement;
+        private String cep;
     }
-    
 
-    public UserModel(String id) {
-        this.id = id;
+    @Data
+    public class Server {
+        private String serverAddress;
+        private String serverName;
     }
-
 }
