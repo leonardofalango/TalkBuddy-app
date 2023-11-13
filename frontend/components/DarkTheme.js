@@ -19,7 +19,7 @@ const DarkTheme = (props) => {
 
     useEffect(() => {
         setIsEnabled(true);
-        var currentTheme = document.documentElement.getAttribute("data-theme");
+        var currentTheme = document.documentElement.setAttribute("data-theme", "dark");
         if (currentTheme === "dark") {
             setIsEnabled(true);
         }
