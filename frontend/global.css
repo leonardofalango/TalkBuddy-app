@@ -9,12 +9,13 @@
 }
 
 ::selection {
-    background-color: #FF902B;
+    background-color: #FF6994;
 }
 
 body {
-    font: 400 14px "Poppins", sans-serif;
+    font: var(--sans-font);
     -webkit-font-smoothing: antialiased;
+    background-color: var(--background-color);
 }
 
 span,
@@ -26,4 +27,43 @@ a {
 
 button {
     cursor: pointer;
+}
+
+
+:root {
+    --sans-font: "Poppins", sans-serif;
+    --error-text-color: #FF0000;
+    --error-background-color: #FFDADA;
+}
+
+html[data-theme='light'] {
+    --background-color : #FFFFFF;
+    --primary-app-color: #FF6994;
+    --primary-system-color: #238CFE;
+
+    --primary-text-color: #191919;
+    --secondary-text-color: rgb(127, 127, 127);
+
+    --line-color: #a6a6a6;
+    --search-box-color: #d5d5d5;
+    --menu-back-color: #F6F6F6;
+
+    --text-input-color: #d5d5d5;
+    --primary-text-button-color: #FEFEFE;
+}
+
+html[data-theme='dark'] {
+    --background-color : #000;
+    --primary-app-color: #e95f9f;
+    --primary-system-color: #34A0FD;
+
+    --primary-text-color: #FEFEFE;
+    --secondary-text-color: #737373;
+
+    --line-color: #858585;
+    --search-box-color: #252525;
+    --menu-back-color: #171717 ;
+
+    --text-input-color: #252525;
+    --primary-text-button-color: #FEFEFE;
 }
