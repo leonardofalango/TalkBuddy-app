@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "stay-easy",
-    "slug": "stay-easy",
+    "name": "talk-buddy",
+    "slug": "talk-buddy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",

@@ -50,6 +50,7 @@ html[data-theme='light'] {
 
     --text-input-color: #d5d5d5;
     --primary-text-button-color: #FEFEFE;
+    --icon-color: #000;
 }
 
 html[data-theme='dark'] {
@@ -66,4 +67,6 @@ html[data-theme='dark'] {
 
     --text-input-color: #252525;
     --primary-text-button-color: #FEFEFE;
+    --icon-color: #FEFEFE;
 }
+

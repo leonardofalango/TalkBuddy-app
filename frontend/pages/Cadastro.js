@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import { IoIosArrowBack } from "react-icons/io";
 import { globalStyle } from '../globalStyle';
+import { useState } from 'react';
 
 export default function Cadastro({ navigation }) {
     const [email, setEmail] = useState('');
@@ -40,13 +41,14 @@ export default function Cadastro({ navigation }) {
 
     return (
         <View style={globalStyle.container}>
+            <TouchableOpacity style={[globalStyle.iconContainer, styles.w10s]}
+                onPress={() => navigation.navigate('login')}
+            >
+                <IoIosArrowBack style={globalStyle.icon} />
+            </TouchableOpacity>
             {
                 error()
             }
-
-            <TouchableOpacity style={globalStyle.backButton}
-                onPress={() => navigation.navigate('login')}
-            ><Text style={globalStyle.textButton}>Back</Text></TouchableOpacity>
             
             <TextInput style={globalStyle.textInput}
                 placeholder='Email'
@@ -87,7 +89,7 @@ export default function Cadastro({ navigation }) {
             <TouchableOpacity style={styles.registerButton}
                 onPress={register}
             ><Text style={globalStyle.textButton}>Register</Text></TouchableOpacity>
-        </View>
+            </View>
     )
 }
 
@@ -102,5 +104,9 @@ const styles = StyleSheet.create({
     },
     textButton : {
         color: 'var(--primary-text-button-color)',
+    },
+    w10s: {
+        width: "100%",
+        paddingLeft: 15
     }
 })

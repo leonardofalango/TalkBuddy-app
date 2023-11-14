@@ -1,9 +1,16 @@
 import { StyleSheet } from 'react-native';
+const logo = require('./assets/talk_buddy_logo.png')
 
 const globalStyle = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'var(--background-color)',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    containerTransparent: {
+        flex: 1,
+        backgroundColor: 'transparent',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -24,8 +31,24 @@ const globalStyle = StyleSheet.create({
     errorButtonText : {
         color: 'var(--error-text-color)',
     },
-    textButton : {
-        color: 'var(--primary-text-button-color)',
+    backgroundImage : {
+        backgroundImage : `url(${logo})`,
+        background: 'rgb(253,51,51)',
+        background: 'var(--background-color)',
+        backgroundRepeat : 'no-repeat',
+        backgroundPosition: 'center',
+        filter : 'blur(1px)',
+        width : '100vw',
+        height : '100vh',
+        position : 'absolute',
+        top: 0,
+        left: 0,
+    },
+    icon : {
+        color: 'var(--icon-color)'
+    },
+    iconContainer: {
+        fontSize: 23
     }
 });
 
