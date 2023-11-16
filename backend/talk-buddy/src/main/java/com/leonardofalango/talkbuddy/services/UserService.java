@@ -6,6 +6,8 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.leonardofalango.talkbuddy.DTO.UserCreate;
+import com.leonardofalango.talkbuddy.DTO.UserLogin;
 import com.leonardofalango.talkbuddy.model.UserModel;
 import com.leonardofalango.talkbuddy.model.UserModel.Server;
 import com.leonardofalango.talkbuddy.repository.UserRepository;
@@ -60,6 +62,25 @@ public class UserService {
             );
         
         return randomUser;
+    }
+
+    public UserModel login(UserLogin user) {
+        UserModel userFound = this.userRepository.findByEmail(user.getEmail());
+
+        if (userFound.getPassword() != user.getPassword())
+            return null;
+
+        return userFound;
+    }
+
+    public UserModel create(UserCreate user) {
+        UserModel userModel = new UserModel();
+        userModel.setEmail(user.getEmail());
+        userModel.setName(user.getName());
+        userModel.setPassword(user.getPassword());
+        userModel.setNumber(user.getNumber());
+        
+        return this.userRepository.save(userModel);
     }
 
 }

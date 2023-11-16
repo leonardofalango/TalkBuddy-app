@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.leonardofalango.talkbuddy.DTO.UserCreate;
 import com.leonardofalango.talkbuddy.DTO.UserDTO;
+import com.leonardofalango.talkbuddy.DTO.UserLogin;
 import com.leonardofalango.talkbuddy.model.UserModel;
 import com.leonardofalango.talkbuddy.services.UserService;
 
@@ -27,5 +29,15 @@ public class UserController {
     @PostMapping("/getRandomUserByServer")
     public UserModel getRandomUserByServer(@RequestBody UserDTO user) {
         return new UserModel();
+    }
+
+    @PostMapping("/login")
+    public UserModel login(@RequestBody UserLogin user) {
+        return userService.login(user);
+    }
+
+    @PostMapping("/create")
+    public UserModel create(@RequestBody UserCreate user) {
+        return userService.create(user);
     }
 }

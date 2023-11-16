@@ -26,14 +26,16 @@ const globalStyle = StyleSheet.create({
         marginTop: 10,
     },
     errorButton : {
-        backgroundColor: 'var(--error-back-color)',
+        backgroundColor: 'var(--error-background-color)',
+        padding: 10,
+        borderRadius: 2,
+        marginTop: 10,
     },
     errorButtonText : {
         color: 'var(--error-text-color)',
     },
     backgroundImage : {
         backgroundImage : `url(${logo})`,
-        background: 'rgb(253,51,51)',
         background: 'var(--background-color)',
         backgroundRepeat : 'no-repeat',
         backgroundPosition: 'center',

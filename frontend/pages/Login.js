@@ -1,24 +1,59 @@
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import DarkTheme from '../components/DarkTheme';
+
+import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 
 import { globalStyle } from '../globalStyle';
+import { LoginService } from '../services/LoginService';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [showError, setShowError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
     const login = () => {
-        console.log('login')
+        const data = { email, password };
+        console.log(data)
+
+        LoginService.login(data)
+            .then((response) => {
+                console.log(response);
+                navigation.navigate('home');
+            })
+
+            .catch((error) => {
+                console.log(error.message);
+                setErrorMessage(error.message);
+                setShowError(true);
+            });
+    }
+
+    const error = () => {
+        if (showError) {
+            return (
+                <TouchableOpacity style={globalStyle.errorButton} onPress={ () => setShowError(false)}>
+                <Text style={globalStyle.errorButtonText}>{errorMessage}</Text>
+                </TouchableOpacity>
+            )
+        }
+        return(
+            <></>
+        );
     }
 
     return (
         <>
-        <View style={ globalStyle.backgroundImage }>
-        </View>
-
-        <View style={ globalStyle.containerTransparent }>
+        <LinearGradient
+            // Background Linear Gradient
+            colors={['var(--background-color)', 'var(--background-color)', 'var(--primary-app-color)']}
+            style={globalStyle.containerTransparent}
+        >
             <DarkTheme shown={true} />
+
+            { error() }
 
             <TextInput style={globalStyle.textInput}
                 placeholder='Email or Number'
@@ -38,17 +73,22 @@ export default function Login({ navigation }) {
 
             <TouchableOpacity style={styles.button}
                 onPress={ login }    
-            >Login</TouchableOpacity>
+            >
+                <>Login</>
+            </TouchableOpacity>
 
             <TouchableOpacity style={styles.forgotPassword}
                 onPress={() => navigation.navigate('forgotPassword')}    
-            >Forgot Password?</TouchableOpacity>
+            >
+                <Text style={styles.forgotPassword}>Forgot Password?</Text>
+            </TouchableOpacity>
             
             <TouchableOpacity style={styles.register}
                 onPress={() => navigation.navigate('cadastro')}
-            ><Text style={styles.textButton}>Register</Text></TouchableOpacity>
-        
-        </View>
+            >
+                <Text style={styles.textButton}>Register</Text>
+            </TouchableOpacity>
+        </LinearGradient>
         </>
         )
 }
@@ -70,9 +110,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 7,
         fontFamily: 'var(--sans-font)',
-    },
-    errorMessage : {
-        color: 'var(--error-color)',
+        marginTop: 10,
     },
     textButton : {
         color: 'var(--primary-text-color)',
