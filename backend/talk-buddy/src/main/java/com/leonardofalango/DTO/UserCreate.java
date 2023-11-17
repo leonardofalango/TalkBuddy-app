@@ -1,4 +1,4 @@
-package com.leonardofalango.talkbuddy.DTO;
+package com.leonardofalango.DTO;
 
 import lombok.Data;
 
@@ -9,4 +9,6 @@ public class UserCreate {
     private String password;
     private String email;
     private String number;
+
+    public UserCreate() {   }
 }

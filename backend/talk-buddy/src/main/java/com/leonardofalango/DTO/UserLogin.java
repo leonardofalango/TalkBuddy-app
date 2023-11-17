@@ -1,4 +1,4 @@
-package com.leonardofalango.talkbuddy.DTO;
+package com.leonardofalango.DTO;
 
 import lombok.Data;
 
@@ -6,4 +6,8 @@ import lombok.Data;
 public class UserLogin {
     String email;
     String password;
+
+    public UserLogin() {
+        
+    }
 }

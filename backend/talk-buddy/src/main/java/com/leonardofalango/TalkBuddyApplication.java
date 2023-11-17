@@ -1,4 +1,4 @@
-package com.leonardofalango.talkbuddy;
+package com.leonardofalango;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

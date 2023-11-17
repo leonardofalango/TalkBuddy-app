@@ -1,10 +1,10 @@
-package com.leonardofalango.talkbuddy.repository;
+package com.leonardofalango.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import com.leonardofalango.talkbuddy.model.UserModel;
-import com.leonardofalango.talkbuddy.model.UserModel.Server;
+import com.leonardofalango.model.UserModel;
+import com.leonardofalango.model.UserModel.Server;
 
 import java.util.List;
 

@@ -21,13 +21,23 @@ export default function Login({ navigation }) {
         LoginService.login(data)
             .then((response) => {
                 console.log(response);
-                navigation.navigate('home');
+                navigation.navigate('main');
             })
 
             .catch((error) => {
-                console.log(error.message);
-                setErrorMessage(error.message);
                 setShowError(true);
+                console.log(error);
+                switch (error.status) {
+                    case 400:
+                        setErrorMessage('Invalid email or password!');
+                        break;
+                    case 500:
+                        setErrorMessage('Server error!');
+                        break;
+                    default:
+                        setErrorMessage('Unknown error!');
+                        break;
+                }
             });
     }
 

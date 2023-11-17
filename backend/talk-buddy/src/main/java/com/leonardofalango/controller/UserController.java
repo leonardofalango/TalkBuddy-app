@@ -1,4 +1,4 @@
-package com.leonardofalango.talkbuddy.controller;
+package com.leonardofalango.controller;
 
 import java.util.List;
 
@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leonardofalango.talkbuddy.DTO.UserCreate;
-import com.leonardofalango.talkbuddy.DTO.UserDTO;
-import com.leonardofalango.talkbuddy.DTO.UserLogin;
-import com.leonardofalango.talkbuddy.model.UserModel;
-import com.leonardofalango.talkbuddy.services.UserService;
+
+import com.leonardofalango.model.UserModel;
+import com.leonardofalango.services.UserService;
+import com.leonardofalango.DTO.UserCreate;
+import com.leonardofalango.DTO.UserDTO;
+import com.leonardofalango.DTO.UserLogin;
 
 @RestController
 @RequestMapping("/user")
@@ -36,8 +37,9 @@ public class UserController {
         return userService.login(user);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/register")
     public UserModel create(@RequestBody UserCreate user) {
+        System.out.println("ASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         return userService.create(user);
     }
 }

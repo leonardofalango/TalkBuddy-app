@@ -7485,7 +7485,7 @@ react-lifecycles-compat@2.0.0:
 
 react-native-aes-crypto@^3.0.1:
   version "3.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-aes-crypto/-/react-native-aes-crypto-3.0.1.tgz#f9941b9397f62c4603eec8b5f07ca38d075661a2"
+  resolved "https://registry.npmjs.org/react-native-aes-crypto/-/react-native-aes-crypto-3.0.1.tgz"
   integrity sha512-51L++eKz13cPeIqg/9Slp1aWIsYOiHzK1jJ9AjcmmtDi3jqtRqdh0y2yJqDI31iBgkQVMz3FjN9zfQ1alj7QBQ==
 
 react-native-camera@^4.2.1:
@@ -7651,6 +7651,11 @@ react-shallow-renderer@^16.15.0:
   dependencies:
     object-assign "^4.1.1"
     react-is "^16.12.0 || ^17.0.0 || ^18.0.0"
+
+react-webcam@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/react-webcam/-/react-webcam-7.2.0.tgz#64141c4c7bdd3e956620500187fa3fcc77e1fd49"
+  integrity sha512-xkrzYPqa1ag2DP+2Q/kLKBmCIfEx49bVdgCCCcZf88oF+0NPEbkwYk3/s/C7Zy0mhM8k+hpdNkBLzxg8H0aWcg==
 
 react@^15.0.1:
   version "15.7.0"

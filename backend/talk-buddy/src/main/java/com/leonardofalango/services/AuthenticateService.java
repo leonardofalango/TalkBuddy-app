@@ -1,4 +1,4 @@
-package com.leonardofalango.talkbuddy.services;
+package com.leonardofalango.services;
 
 // import org.springframework.beans.factory.annotation.Autowired;
 

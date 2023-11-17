@@ -1,4 +1,4 @@
-package com.leonardofalango.talkbuddy.DTO;
+package com.leonardofalango.DTO;
 
 import lombok.Data;
 
@@ -6,4 +6,6 @@ import lombok.Data;
 public class UserDTO {
     private String token;
     private String _id;
+
+    public UserDTO() {   }
 }

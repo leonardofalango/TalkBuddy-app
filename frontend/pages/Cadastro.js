@@ -2,6 +2,7 @@ import { View, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-nativ
 import { IoIosArrowBack } from "react-icons/io";
 import { globalStyle } from '../globalStyle';
 import { useState } from 'react';
+import { LoginService } from '../services/LoginService';
 
 export default function Cadastro({ navigation }) {
     const [email, setEmail] = useState('');
@@ -13,6 +14,22 @@ export default function Cadastro({ navigation }) {
     const register = () => {
         console.log("Registering...")
         checkPassword();
+        if (checkPassword()) {
+            const data = {
+                email: email,
+                password: password,
+                number: number,
+                name: name,
+            }
+
+            LoginService.register(data).then(response => {
+                console.log(response);
+                navigation.navigate('login');
+            }).catch(error => {
+                console.log(error);
+                setErrorMessage(error.message);
+            })
+        }
     }
 
     const checkPassword = () => {

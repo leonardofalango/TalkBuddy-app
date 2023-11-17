@@ -1,4 +1,4 @@
-package com.leonardofalango.talkbuddy.model;
+package com.leonardofalango.model;
 
 import java.util.Date;
 
