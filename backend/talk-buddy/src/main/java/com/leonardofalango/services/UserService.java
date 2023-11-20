@@ -76,9 +76,13 @@ public class UserService {
     public UserModel login(UserLogin user) {
         UserModel userFound = this.userRepository.findByEmail(user.getEmail());
 
-        if (userFound.getPassword() != DigestUtils.md5DigestAsHex(user.getPassword().getBytes()).toUpperCase())
+        String pass = DigestUtils.md5DigestAsHex(user.getPassword().getBytes()).toUpperCase();
+        
+        if (!userFound.getPassword().equals(pass))
             return null;
-
+        
+        System.out.println(userFound);
+        
         return userFound;
     }
 
@@ -86,8 +90,6 @@ public class UserService {
         UserModel userModel = new UserModel();
         userModel.setEmail(user.getEmail());
         userModel.setName(user.getName());
-        // add md5hash encrypt in password
-
 
         
 
@@ -99,6 +101,10 @@ public class UserService {
         userModel.setNumber(user.getNumber());
         
         return this.userRepository.save(userModel);
+    }
+
+    public UserModel getByEmailOrName(String emailOrName) {
+        return this.userRepository.findByEmail(emailOrName);
     }
 
 }

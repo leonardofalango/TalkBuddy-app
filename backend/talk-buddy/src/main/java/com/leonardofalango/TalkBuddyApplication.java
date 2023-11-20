@@ -10,4 +10,5 @@ public class TalkBuddyApplication {
 		SpringApplication.run(TalkBuddyApplication.class, args);
 	}
 
+
 }

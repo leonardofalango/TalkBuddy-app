@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { globalStyle } from '../globalStyle';
 import { LoginService } from '../services/LoginService';
 
+import { AsyncStorage } from 'react-native';
+
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +23,15 @@ export default function Login({ navigation }) {
         LoginService.login(data)
             .then((response) => {
                 console.log(response);
-                navigation.navigate('main');
+                if (!response)
+                    setErrorMessage('Invalid email or password!');
+
+                    // AsyncStorage.setItem('token', response.token);
+                    // AsyncStorage.setItem('user', JSON.stringify(response.user));
+                
+                else {
+                    navigation.navigate('main');
+                }
             })
 
             .catch((error) => {
