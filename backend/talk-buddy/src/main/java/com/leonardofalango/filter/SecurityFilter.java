@@ -1,4 +1,4 @@
-package com.leonardofalango.config.filter;
+package com.leonardofalango.filter;
 
 import java.io.IOException;
 

@@ -24,22 +24,25 @@ public class UserController {
 
     @GetMapping({"/", ""})
     public List<UserModel> getAll() {
+        System.out.println("getAll");
         return userService.findAll();
     } 
 
     @PostMapping("/getRandomUserByServer")
     public UserModel getRandomUserByServer(@RequestBody UserDTO user) {
+        System.out.println("getRandomUserByServer");
         return new UserModel();
     }
 
     @PostMapping("/login")
     public UserModel login(@RequestBody UserLogin user) {
+        System.out.println("login");
         return userService.login(user);
     }
 
     @PostMapping("/register")
     public UserModel create(@RequestBody UserCreate user) {
-        System.out.println("ASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        System.out.println("register");
         return userService.create(user);
     }
 }

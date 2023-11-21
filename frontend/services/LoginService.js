@@ -5,21 +5,8 @@ import axios from 'axios'
 class LoginService
 {
     static login = async (data) => {
-        // encrypting with aes
         try {
-            // const dataAes = (text, key) => {
-            //     return Aes.randomKey(16).then(iv => {
-            //         return Aes.encrypt(text, key, iv, 'aes-256-cbc').then(cipher => ({
-            //             cipher,
-            //             iv,
-            //         }))
-            //     })
-            // }
-            // console.log(dataAes);
-    
-            const dataAes = data
-
-            const response = await axios.post("http://localhost:8080/user/login", dataAes)
+            const response = await axios.post("http://localhost:8080/user/login", data)
             return response.data;
         } catch (error) {
             throw error;
@@ -29,7 +16,11 @@ class LoginService
 
     static register = async (data) => {
         try {
-            const response = await axios.post("http://localhost:8080/user/register", data)
+            const response = await axios.post("http://localhost:8080/user/register", data,{
+                headers:{
+                    'Access-Control-Allow-Origin':"*",
+                }
+            })
 
             switch (response.status) {
                 case 200:

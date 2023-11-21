@@ -23,18 +23,15 @@ public class AuthenticateService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
-    @Value("${jwt.secret")
-    private String secret;
-
-    @Value("${jwt.issuer}")
-    private String issuer;
+    // @Value("${jwt.secret")
+    // private String secret;
 
     public String createToken(UserModel user) throws AuthException {
         try {
 
-            final var anAlgorithm = Algorithm.HMAC256(secret);
-            final String aToken = JWT.create()
-                    .withIssuer(issuer)
+            final var anAlgorithm = Algorithm.HMAC256("teste");
+            final String aToken = JWT
+                    .create()
                     .withSubject(user.getEmail())
                     .withExpiresAt(new Date(new Date(0).getTime() + 24 * 60 * 60 * 1000))
                     .sign(anAlgorithm);
@@ -50,9 +47,9 @@ public class AuthenticateService implements UserDetailsService {
 
     public String validateToken(String token) {
         try {
-            final var anAlgorithm = Algorithm.HMAC256(secret);
-            final var decoded = JWT.require(anAlgorithm)
-                    .withIssuer(issuer)
+            final var anAlgorithm = Algorithm.HMAC256("teste");
+            final var decoded = JWT
+                    .require(anAlgorithm)
                     .build()
                     .verify(token);
             final var anSubject = decoded.getSubject();
