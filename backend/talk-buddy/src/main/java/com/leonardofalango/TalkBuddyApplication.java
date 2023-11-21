@@ -9,6 +9,4 @@ public class TalkBuddyApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TalkBuddyApplication.class, args);
 	}
-
-
 }

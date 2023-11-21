@@ -1,52 +1,47 @@
 package com.leonardofalango.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leonardofalango.config.JwtTokenUtil;
-import com.leonardofalango.model.JwtRequest;
-import com.leonardofalango.model.JwtResponse;
-import com.leonardofalango.services.JwtUserDetailsService;
+import com.leonardofalango.model.UserModel;
+import com.leonardofalango.services.AuthenticateService;
+import com.leonardofalango.services.UserService;
+
+import jakarta.security.auth.message.AuthException;
 
 @RestController
-@CrossOrigin
+@RequestMapping("/auth")
 public class JwtAuthentication {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-    
+    private UserService userService;
+
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-    
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
-    
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
-        final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
-    }
-    
-    private void authenticate(String username, String password) throws Exception {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
-        } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+    private AuthenticateService authService;
+
+    @PostMapping("/login")
+    public String login(@RequestBody UserModel user) throws AuthException {
+        UserModel resp = this.userService.findByEmail(user.getEmail());
+        if (resp != null) {
+            if (resp.getPassword().equals(user.getPassword())) {
+                return authService.createToken(user);
+            }
+            return "Senha incorreta";
         }
-        }
+        return "Usuário não encontrado";
     }
+
+    @PostMapping("/validate")
+    public String validate(@RequestHeader("Authorization") String token) {
+        final var validate = this.authService.validateToken(token.replace("Bearer ", ""));
+        if (!validate.isBlank()) {
+            return validate;
+        }
+        return "token not valid";
+    }
+
+}

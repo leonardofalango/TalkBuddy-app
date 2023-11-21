@@ -20,11 +20,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    private MessageDigest md;
-    
-    public UserService() throws NoSuchAlgorithmException {
-        this.md = MessageDigest.getInstance("MD5");
-    }
 
     public UserModel save(UserModel userModel) {
         return this.userRepository.save(userModel);
@@ -105,6 +100,10 @@ public class UserService {
 
     public UserModel getByEmailOrName(String emailOrName) {
         return this.userRepository.findByEmail(emailOrName);
+    }
+
+    public UserModel findByEmail(String email) {
+        return this.userRepository.findByEmail(email);
     }
 
 }
