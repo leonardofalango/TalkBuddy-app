@@ -1,5 +1,8 @@
-import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { HelperText, TextInput } from 'react-native-paper';
 import DarkTheme from '../components/DarkTheme';
+import { Checkbox } from 'react-native-paper';
+
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
@@ -12,6 +15,8 @@ import { AsyncStorage } from 'react-native';
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [isPass, setIsPass] = useState(false);
 
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -75,21 +80,47 @@ export default function Login({ navigation }) {
 
             { error() }
 
-            <TextInput style={globalStyle.textInput}
-                placeholder='Email or Number'
+            <TextInput type='outlined' style={globalStyle.textInput}
+                placeholder='example@email.com'
                 placeholderTextColor='var(--secondary-text-color)'
+                textColor='var(--primary-text-color)'
+                label='Email or Number'
+                maxLenght={80}
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
             ></TextInput>
 
-            <TextInput style={globalStyle.textInput}
-                placeholder='Password'
-                secureTextEntry={true}
+            <TextInput type='outlined' style={globalStyle.textInput}
+                placeholder='*******'
+                label='Password'
+                secureTextEntry={!isPass}
                 placeholderTextColor='var(--secondary-text-color)'
+                textColor='var(--primary-text-color)'
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
             ></TextInput>
 
+            <View style={styles.checkbox}>
+                <View style={{flexDirection:'row', alignItems:'center'}}>
+                    <Checkbox
+                        status={isPass ? 'checked' : 'unchecked'}
+                        onPress={() => {
+                            setIsPass(!isPass);
+                        }}
+                        color='#FF00FF'
+                        
+                    />
+                    <Text style={globalStyle.text}>
+                        Show password
+                    </Text>
+                </View>
+
+                <TouchableOpacity style={styles.forgotPassword}
+                    onPress={() => navigation.navigate('forgotPassword')}    
+                    >
+                    <Text style={styles.forgotPassword}>Forgot Password?</Text>
+                </TouchableOpacity>
+            </View>
 
             <TouchableOpacity style={styles.button}
                 onPress={ login }    
@@ -97,11 +128,7 @@ export default function Login({ navigation }) {
                 <>Login</>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.forgotPassword}
-                onPress={() => navigation.navigate('forgotPassword')}    
-            >
-                <Text style={styles.forgotPassword}>Forgot Password?</Text>
-            </TouchableOpacity>
+            
             
             <TouchableOpacity style={styles.register}
                 onPress={() => navigation.navigate('cadastro')}
@@ -120,10 +147,8 @@ const styles = StyleSheet.create({
     
     forgotPassword: {
         color: 'var(--primary-system-color)',
-        marginTop: 7,
         fontFamily: 'var(--sans-font)',
-        fontSize: 16,
-        height: 15
+        fontSize: 15,
     },
     register: {
         color: 'var(--secondary-text-color)',
@@ -137,12 +162,19 @@ const styles = StyleSheet.create({
     },
     button : {
         color: 'white',
-        backgroundColor: 'var(--primary-system-color)',
+        backgroundColor: 'var(--primary-app-color)',
         borderRadius: 10,
         padding: 7,
-        marginTop: 10,
+        marginTop: 15,
         fontFamily: 'var(--sans-font)',
         width: "80%",
         textAlign: 'center',
+    },
+    checkbox : {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '80%',
+        marginTop: 7
     }
 });

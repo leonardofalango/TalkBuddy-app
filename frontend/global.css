@@ -51,7 +51,7 @@ html[data-theme='light'] {
 
     --text-input-color: #d5d5d5;
     --primary-text-button-color: #FEFEFE;
-    --icon-color: #000;
+    --icon-color: #FF6994;
 }
 
 html[data-theme='dark'] {

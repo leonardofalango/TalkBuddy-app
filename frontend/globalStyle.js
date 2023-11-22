@@ -51,6 +51,10 @@ const globalStyle = StyleSheet.create({
     },
     iconContainer: {
         fontSize: 23
+    },
+    text : {
+        color: 'var(--primary-text-color)',
+        fontSize: 15
     }
 });
 

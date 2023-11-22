@@ -1,4 +1,7 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
+const defaultImage = require('../assets/talk_buddy_logo.png')
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import DoneIcon from '@mui/icons-material/Done';
 
 const ContactComponent = ({props}) => {
     
@@ -6,13 +9,11 @@ const ContactComponent = ({props}) => {
         if(props.isYourMessage){
             if(props.isRead){
                 return (
-                    // <Image source={require('../assets/icons/check-double.png')} style={styles.checkIcon} />
-                    <></>
+                    <DoneAllIcon style={ styles.icon } />
                 )
             }else{
                 return (
-                    // <Image source={require('../assets/icons/check.png')} style={styles.checkIcon} />
-                    <></>
+                    <DoneIcon style={ styles.icon } />
                 )
             }
         }
@@ -33,16 +34,20 @@ const ContactComponent = ({props}) => {
 
     return (
         <View style={styles.container}>
-            <Image source={props.image} style={styles.image} />
+            <Image source={
+                props.image? props.image : defaultImage
+            } style={styles.image} />
 
             <View style={styles.containerCenter}>
-                { iconCheck() }
                 <Text style={styles.contactName}>
                     {props.name? props.name : props.number}
                 </Text>
-                <Text style={styles.lastMessage} numberOfLines={2}>
-                    {props.lastMessage}
-                </Text>
+                <View style={ styles.row }>
+                    { iconCheck() }
+                    <Text style={styles.lastMessage} numberOfLines={2}>
+                        {props.lastMessage}
+                    </Text>
+                </View>
             </View>
                 
 
@@ -115,6 +120,13 @@ const styles = StyleSheet.create({
         lineHeight: '1.2rem',
         color: 'var(--text-input-color)',
         fontSize: 15,
+    },
+    row: {
+        flexDirection: 'row',
+        gap: 5
+    },
+    icon: {
+        color: 'var(--text-input-color)'
     }
 })
 

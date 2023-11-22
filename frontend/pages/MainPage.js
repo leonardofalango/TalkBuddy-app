@@ -3,6 +3,10 @@ import { View, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Divider, Text } from 'react-native-paper';
 import ContactComponent from '../components/Contact';
+import { AppBarComponent } from '../components/Appbar'
+import { TouchableOpacity } from 'react-native';
+import { useEffect } from 'react';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 
 export default function MainPage({ navigation }) {
@@ -10,7 +14,7 @@ export default function MainPage({ navigation }) {
     const [list, setList] = useState([
         {
             id: 1,
-            name: 'É o Falas',
+            name: 'Não é o Falas',
             number : '+55 98714-1533',
             image: 'https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg',
             lastMessage : 'Eu quero morrer!Eu quero morrer!Eu quero morrer!Eu quero morrer!Eu quero morrer!Eu quero morrer!Eu quero morrer!Eu quero morrer!',
@@ -29,26 +33,30 @@ export default function MainPage({ navigation }) {
             lastmessageTime : '16:14',
             isRead: true,
             unreadMessages: 0,
-        }
+        },
     ])
 
     return (
-    <View>
-
-        <FlatList
-            data={list}
-            renderItem={({item}) => (
-                <>
-                    <ContactComponent
-                        props={item}
-                    />
-                    <Divider />
-                </>
-            )}
-            keyExtractor={item => item.id}
-        >
-        </FlatList>
-    </View>
+    <>  
+        <AppBarComponent title='Talk-Buddy' />
+        <View>
+        
+        <Divider />
+            <FlatList
+                data={list}
+                renderItem={({item, i}) => (
+                    <TouchableOpacity>
+                        <ContactComponent
+                            props={item}
+                        />
+                        <Divider />
+                    </TouchableOpacity>
+                )}
+                keyExtractor={item => item.id}
+            >
+            </FlatList>
+        </View>
+    </>
     )
 }
 
