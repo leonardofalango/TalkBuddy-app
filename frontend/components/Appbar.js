@@ -32,20 +32,19 @@ const AppBarComponent = (props) => {
 
 const styles = StyleSheet.create({
   top: {
-    backgroundColor: 'var(--menu-back-color)',
+    backgroundColor: 'var(--background-color)',
     height: 80,
     justifyContent: 'space-between',
     alignItems: 'space-between',
-    paddingHorizontal: 13,
     height: 65,
     marginTop: 65
   },
   title: {
-
   },
   titleText: {
     fontSize: 34,
     fontWeight: 700,
+    color: 'var(--primary-text-color)'
   },
   iconAndText: {
     flexDirection: 'row',

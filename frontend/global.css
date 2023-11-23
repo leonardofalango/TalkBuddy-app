@@ -34,7 +34,23 @@ button {
     --sans-font: "Poppins", sans-serif;
     --error-text-color: #FF0000;
     --error-background-color: #FFDADA;
+
+
+    /* Defaulting darkmode */
+    --background-color : #FBFBFB;
+    --primary-app-color: #FF6994;
     --primary-system-color: #238CFE;
+
+    --primary-text-color: #191919;
+    --secondary-text-color: rgb(127, 127, 127);
+
+    --line-color: #a6a6a6;
+    --search-box-color: #d5d5d5;
+    --menu-back-color: #F6F6F6;
+
+    --text-input-color: #d5d5d5;
+    --primary-text-button-color: #FEFEFE;
+    --icon-color: #FF6994;
 }
 
 html[data-theme='light'] {
@@ -60,7 +76,7 @@ html[data-theme='dark'] {
     --primary-system-color: #34A0FD;
 
     --primary-text-color: #FEFEFE;
-    --secondary-text-color: #737373;
+    --secondary-text-color: #7F7F7F;
 
     --line-color: #858585;
     --search-box-color: #252525;
@@ -68,6 +84,59 @@ html[data-theme='dark'] {
 
     --text-input-color: #252525;
     --primary-text-button-color: #FEFEFE;
-    --icon-color: #FEFEFE;
+    --icon-color: #e95f9f;
+    --shadow-color: rgba(255,255,255, .35)
 }
 
+
+
+/* Bubble chat */
+p {
+    max-width: 255px;
+    word-wrap: break-word;
+    margin-bottom: 12px;
+    line-height: 24px;
+    position: relative;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+p:before, p:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 25px;
+}
+.from-me {
+    color: white;
+    background: #0b93f6;
+    align-self: flex-end;
+}
+.from-me:before {
+    right: -7px;
+    width: 20px;
+    background-color: #0b93f6;
+    border-bottom-left-radius: 16px 14px;
+}
+.from-me:after {
+    right: -26px;
+    width: 26px;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+}
+.from-them {
+    background: #e5e5ea;
+    color: black;
+    align-self: flex-start;
+}
+.from-them:before {
+    left: -7px;
+    width: 20px;
+    background-color: #e5e5ea;
+    border-bottom-right-radius: 16px;
+}
+.from-them:after {
+    left: -26px;
+    width: 26px;
+    background-color: white;
+    border-bottom-right-radius: 10px;
+}

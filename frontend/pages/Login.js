@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { HelperText, TextInput } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 import DarkTheme from '../components/DarkTheme';
 import { Checkbox } from 'react-native-paper';
 

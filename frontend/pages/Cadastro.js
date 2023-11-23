@@ -13,8 +13,10 @@ export default function Cadastro({ navigation }) {
 
     const register = () => {
         console.log("Registering...")
-        checkPassword();
-        if (checkPassword()) {
+        let inputs = checkInputs();
+        let pass = checkPassword();
+
+        if (pass && inputs) {
             const data = {
                 email: email,
                 password: password,
@@ -40,6 +42,10 @@ export default function Cadastro({ navigation }) {
             setErrorMessage('Passwords must be equal!')
             return false;
         }
+    }
+
+    const checkInputs = () => {
+        return true;
     }
 
     const error = () => {

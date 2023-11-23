@@ -80,14 +80,14 @@ const styles = StyleSheet.create({
     contactName: {
         fontWeight: 'bold',
         fontSize: 17,
-        color: 'var(--primart-text-color)',
+        color: 'var(--primary-text-color)',
     },
 
     timeText: {
         color: 'var(--primary-system-color)',
     },
     timeTextRead: {
-        color: 'var(--text-input-color)',
+        color: 'var(--secondary-text-color)',
     },
     time: {
         alignItems: 'flex-end',
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     lastMessage : {
         paddingTop: 5,
         lineHeight: '1.2rem',
-        color: 'var(--text-input-color)',
+        color: 'var(--secondary-text-color)',
         fontSize: 15,
     },
     row: {

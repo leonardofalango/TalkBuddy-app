@@ -3,10 +3,11 @@ import { View, StyleSheet } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Divider, Text } from 'react-native-paper';
 import ContactComponent from '../components/Contact';
-import { AppBarComponent } from '../components/Appbar'
 import { TouchableOpacity } from 'react-native';
-import { useEffect } from 'react';
-import { ConstructionOutlined } from '@mui/icons-material';
+import { HeaderMain } from '../components/HeaderMain';
+import { globalStyle } from '../globalStyle';
+import { Modal, Portal, Button, PaperProvider } from 'react-native-paper';
+import { ShowLastMessages } from '../components/ShowLastMessages';
 
 
 export default function MainPage({ navigation }) {
@@ -36,32 +37,39 @@ export default function MainPage({ navigation }) {
         },
     ])
 
+    const [visible, setVisible] = useState(false);
+
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
+
     return (
-    <>  
-        <AppBarComponent title='Talk-Buddy' />
-        <View>
-        
-        <Divider />
-            <FlatList
-                data={list}
-                renderItem={({item, i}) => (
-                    <TouchableOpacity>
-                        <ContactComponent
-                            props={item}
-                        />
-                        <Divider />
-                    </TouchableOpacity>
-                )}
-                keyExtractor={item => item.id}
-            >
-            </FlatList>
+    <> 
+        <View style={globalStyle.container}>
+        <PaperProvider>
+        <HeaderMain />
+                <Portal>
+                    <Modal visible={visible} onDismiss={hideModal}>
+                    <ShowLastMessages />
+                    </Modal>
+                </Portal>
+
+                <Divider/>
+                
+                <FlatList
+                    data={list}
+                    renderItem={({item, i}) => (
+                        <TouchableOpacity onLongPress={showModal}>
+                            <ContactComponent
+                                props={item}
+                            />
+                            <Divider />
+                        </TouchableOpacity>
+                    )}
+                    keyExtractor={item => item.id}
+                >
+                </FlatList>
+        </PaperProvider>
         </View>
     </>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#222222',
-    },
-});
