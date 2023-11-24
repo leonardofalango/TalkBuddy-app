@@ -18,22 +18,19 @@ const ReceivedMessage = (props) => {
 export { ReceivedMessage }
 
 const styles = StyleSheet.create({   
-    /*Arrow head for recevied messages*/
     leftArrow: {
         position: "absolute",
         backgroundColor: "#dedede",
-        //backgroundColor:"red",
         width: 20,
         height: 25,
         bottom: 0,
         borderBottomRightRadius: 25,
-        left: -10
+        left: -10,
     },
     
     leftArrowOverlap: {
         position: "absolute",
         backgroundColor: "var(--background-color)",
-        //backgroundColor:"green",
         width: 20,
         height: 35,
         bottom: -6,
@@ -49,10 +46,7 @@ const styles = StyleSheet.create({
         marginLeft: "5%",
         maxWidth: '50%',
         alignSelf: 'flex-start',
-        //maxWidth: 500,
-        //padding: 14,
-        
-        //alignItems:"center",
         borderRadius: 20,
+        marginLeft: 20
     }
     })

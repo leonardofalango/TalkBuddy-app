@@ -43,13 +43,12 @@ const styles = StyleSheet.create({
         padding:10,
         marginLeft: '45%',
         borderRadius: 5,
-        //marginBottom: 15,
         marginTop: 5,
         marginRight: "5%",
         maxWidth: '50%',
         alignSelf: 'flex-end',
-        //maxWidth: 500,
         
         borderRadius: 20,
+        marginRight: 20
     }
     })

@@ -21,13 +21,14 @@ export { ShowLastMessages }
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'var(--background-color)',
-        height: '50vh',
+        height: '80vh',
         width: '80vw',
-        borderRadius: 7
+        borderRadius: 7,
+        paddingTop: 10,
     },
     content: {
         justifyContent: 'center',
-        paddingHorizontal: 13,
+        paddingHorizontal: 10,
         alignItems: 'center',
     },
     
