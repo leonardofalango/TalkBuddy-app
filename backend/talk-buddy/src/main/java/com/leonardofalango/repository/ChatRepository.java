@@ -11,12 +11,9 @@ import java.util.List;
 public interface ChatRepository extends MongoRepository<Chat, String> {
     
     @Query("{'usersId' : ?0}")
-    List<Chat> findUserChats(String[] usersId);
+    List<Chat> findUserChats(String userId);
 
     @Query("{$all: ['usersId1' : ?0, 'usersId2' : ?1}]")
     Chat findChatWithMembers(String userId1, String userId2);
-
-    @Query("{usersId : {$in : [?0]}}")
-    List<Chat> findUserChats(String userId);
     
 }

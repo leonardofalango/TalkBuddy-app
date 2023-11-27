@@ -42,9 +42,8 @@ public class ChatController {
     }
 
     @PostMapping("/find/")
-    public List<Chat> findChat(@RequestParam String userId) {
+    public Chat findChat(@RequestBody CreateChat chat) {
         System.out.println("findChat");
-
-        return chatService.findChat(userId);
+        return chatService.findChat(chat.getUserId1(), chat.getUserId2());
     }
 }

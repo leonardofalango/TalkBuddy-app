@@ -32,9 +32,9 @@ public class ChatService {
         return chatRepository.findUserChats(userId);
     }
 
-    public List<Chat> findChat(String userId) {
+    public Chat findChat(String userId, String userId1) {
         System.out.println("findChat");
 
-        return chatRepository.findUserChats(userId);
+        return chatRepository.findChatWithMembers(userId, userId1);
     }
 }
