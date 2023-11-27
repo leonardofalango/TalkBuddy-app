@@ -1,4 +1,4 @@
-package com.leonardofalango.controller;
+package com.leonardofalango.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

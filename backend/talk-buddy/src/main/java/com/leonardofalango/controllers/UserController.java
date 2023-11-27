@@ -1,4 +1,4 @@
-package com.leonardofalango.controller;
+package com.leonardofalango.controllers;
 
 import java.util.List;
 
