@@ -6,7 +6,9 @@ class LoginService
 {
     static login = async (data) => {
         try {
-            const response = await axios.post("http://localhost:8080/user/login", data)
+            console.log(data);
+
+            const response = await axios.post("http://localhost:8080/auth/login", data)
             return response.data;
         } catch (error) {
             throw error;

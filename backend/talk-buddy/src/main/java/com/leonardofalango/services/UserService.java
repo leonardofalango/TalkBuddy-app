@@ -67,7 +67,7 @@ public class UserService {
     }
 
     public UserModel login(UserLogin user) {
-        UserModel userFound = this.userRepository.findByEmail(user.getEmail());
+        UserModel userFound = this.userRepository.findByEmail(user.getEmail()).get(0);
 
         String pass = DigestUtils.md5DigestAsHex(user.getPassword().getBytes()).toUpperCase();
         
@@ -97,10 +97,10 @@ public class UserService {
     }
 
     public UserModel getByEmailOrName(String emailOrName) {
-        return this.userRepository.findByEmail(emailOrName);
+        return this.userRepository.findByEmail(emailOrName).get(0);
     }
 
-    public UserModel findByEmail(String email) {
+    public List<UserModel> findByEmail(String email) {
         return this.userRepository.findByEmail(email);
     }
 

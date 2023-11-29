@@ -12,10 +12,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen options={{headerShown: false}} name="chat" component={Chat} />
-        <Stack.Screen options={{headerShown: false}} name="main" component={MainPage} />
-        <Stack.Screen options={{headerShown: false}} name="login" component={Login} />
-        <Stack.Screen options={{headerShown: false}} name="cadastro" component={Cadastro} />
+        <Stack.Screen options={{headerShown: false}} name="login" component={ Login } />
+        <Stack.Screen options={{headerShown: false}} name="chat" component={ Chat } />
+        <Stack.Screen options={{headerShown: false}} name="main" component={ MainPage } />
+        <Stack.Screen options={{headerShown: false}} name="cadastro" component={ Cadastro } />
         <Stack.Screen options={{headerShown: true}} name="forgotPassword" component={ ForgotPassword } />
       </Stack.Navigator>
     </NavigationContainer>

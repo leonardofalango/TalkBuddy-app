@@ -25,9 +25,13 @@ public class UserController {
     @GetMapping({"/", ""})
     public List<UserModel> getAll() {
         System.out.println("getAll");
+        System.out.println("getAll");
+        System.out.println("getAll");
+        System.out.println("getAll");
+        System.out.println("getAll");
         return userService.findAll();
     } 
-
+    
     @PostMapping("/getRandomUserByServer")
     public UserModel getRandomUserByServer(@RequestBody UserDTO user) {
         System.out.println("getRandomUserByServer");
