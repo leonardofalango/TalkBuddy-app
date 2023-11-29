@@ -12,11 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.leonardofalango.DTO.Response;
 import com.leonardofalango.model.UserModel;
 
 import jakarta.security.auth.message.AuthException;
-
-// import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class AuthenticateService implements UserDetailsService {
@@ -27,7 +26,7 @@ public class AuthenticateService implements UserDetailsService {
     @Value("${jwt.secret")
     private String secret;
 
-    public String createToken(UserModel user) throws AuthException {
+    public Response createToken(UserModel user) throws AuthException {
         try {
 
             final var anAlgorithm = Algorithm.HMAC256(secret);
@@ -36,7 +35,7 @@ public class AuthenticateService implements UserDetailsService {
                     .withSubject(user.getEmail())
                     .withExpiresAt(new Date(new Date().getTime() + 24 * 60 * 60 * 1000))
                     .sign(anAlgorithm);
-            return aToken;
+            return new Response(aToken);
 
         } catch (IllegalArgumentException e) {
             throw new AuthException(e.getMessage());
@@ -46,21 +45,17 @@ public class AuthenticateService implements UserDetailsService {
 
     }
 
-    public String validateToken(String token) {
+    public Response validateToken(String token) {
         System.out.println("token: " + token);
 
-        try {
-            final var anAlgorithm = Algorithm.HMAC256(secret);
-            final var decoded = JWT
-                    .require(anAlgorithm)
-                    .build()
-                    .verify(token);
-            final var anSubject = decoded.getSubject();
-            return anSubject;
-        } catch (Exception e) {
-            System.out.println(" Error "+e);
-            return "";
-        }
+        final var anAlgorithm = Algorithm.HMAC256(secret);
+        final var decoded = JWT
+                .require(anAlgorithm)
+                .build()
+                .verify(token);
+        final var anSubject = decoded.getSubject();
+        return new Response(anSubject);
+        
     }
 
     @Override
@@ -72,7 +67,6 @@ public class AuthenticateService implements UserDetailsService {
             } 
         }
         throw new UsernameNotFoundException("User not found");
-        
     }
 
 }

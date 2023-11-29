@@ -28,15 +28,14 @@ export default function Login({ navigation }) {
         LoginService.login(data)
             .then((response) => {
                 console.log(response);
-                if (!response)
-                    setErrorMessage('Invalid email or password!');
 
-                    // AsyncStorage.setItem('token', response.token);
-                    // AsyncStorage.setItem('user', JSON.stringify(response.user));
-                
-                else {
+                if (response.status == 200) {
+                    // AsyncStorage.setItem('token', response.data.token);
                     navigation.navigate('main');
                 }
+
+                setErrorMessage('Invalid email or password!');
+                setShowError(true);
             })
 
             .catch((error) => {
