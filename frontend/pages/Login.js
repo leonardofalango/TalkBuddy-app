@@ -1,7 +1,9 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import DarkTheme from '../components/DarkTheme';
 import { Checkbox } from 'react-native-paper';
+
 
 
 import { LinearGradient } from 'expo-linear-gradient';
@@ -9,8 +11,7 @@ import { useState } from 'react';
 
 import { globalStyle } from '../globalStyle';
 import { LoginService } from '../services/LoginService';
-
-import { AsyncStorage } from 'react-native';
+import { authSlice } from '../redux/authSlice';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
@@ -21,17 +22,20 @@ export default function Login({ navigation }) {
     const [showError, setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
+    const dispatch = useDispatch();
+    const { setAuth } = authSlice.actions;
+
     const login = () => {
         const data = { email, password };
-        console.log(data)
+        // console.log(data)
 
         LoginService.login(data)
             .then((response) => {
                 console.log(response);
 
                 if (response.status == 200) {
-                    // AsyncStorage.setItem('token', response.data.token);
-                    navigation.navigate('main');
+                    dispatch(setAuth(response.data.token));
+                    navigation.navigate('main-page');
                 }
 
                 setErrorMessage('Invalid email or password!');
@@ -75,8 +79,6 @@ export default function Login({ navigation }) {
             colors={['var(--background-color)', 'var(--background-color)', 'var(--primary-app-color)']}
             style={globalStyle.containerTransparent}
         >
-            <DarkTheme shown={true} />
-
             { error() }
 
             <TextInput type='outlined' style={globalStyle.textInput}

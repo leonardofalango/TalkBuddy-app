@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { Divider, Text } from 'react-native-paper';
+import { Divider } from 'react-native-paper';
 import ContactComponent from '../components/Contact';
 import { TouchableOpacity } from 'react-native';
 import { HeaderMain } from '../components/HeaderMain';
 import { globalStyle } from '../globalStyle';
-import { Modal, Portal, Button, PaperProvider } from 'react-native-paper';
+import { Modal, Portal, PaperProvider } from 'react-native-paper';
 import { ShowLastMessages } from '../components/ShowLastMessages';
 
 
@@ -58,7 +58,10 @@ export default function MainPage({ navigation }) {
                 <FlatList
                     data={list}
                     renderItem={({item, i}) => (
-                        <TouchableOpacity onLongPress={showModal}>
+                        <TouchableOpacity
+                            onLongPress={showModal}
+                            onPress={() => navigation.navigate('chat', {idChat: item.id})}
+                        >
                             <ContactComponent
                                 props={item}
                             />

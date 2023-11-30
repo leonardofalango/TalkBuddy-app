@@ -3,17 +3,16 @@ import { useEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { FlatList } from 'react-native-web'
 import { ChatHeader } from '../components/ChatHeader'
-import ContactComponent from '../components/Contact'
 import { ChatService } from '../services/ChatService'
 
 import { ReceivedMessage } from '../components/ReceivedMessage'
 import { SentMessage } from '../components/SentMessage'
 
-const Chat = () => {
+const Chat = (props) => {
     const [chat, setChat] = useState({})
 
     const getChat = async () => {
-        const chat = await ChatService.getChat(1, 'token')
+        const chat = await ChatService.getChat(props.idChat, 'token')
         setChat(chat)
         console.log(chat)
     }

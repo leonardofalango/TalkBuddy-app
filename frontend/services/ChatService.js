@@ -1,10 +1,9 @@
 import axios from 'axios'
-import { AsyncStorage } from 'react-native'
 
 class ChatService
 {
     // static token = AsyncStorage.getItem('token');
-    static getChat(chatID) {
+    static getChat(chatID, token=null) {
         // Just for testing
         const chat = {
             id: 1,

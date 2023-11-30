@@ -1,5 +1,4 @@
 
-import Aes from 'react-native-aes-crypto'
 import axios from 'axios'
 
 class LoginService

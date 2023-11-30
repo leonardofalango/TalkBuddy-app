@@ -3,14 +3,21 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { StyleSheet, TouchableOpacity, View } from "react-native-web"
 import { Surface, Text } from "react-native-paper"
 import { Image } from "react-native"
+import { useNavigation } from '@react-navigation/native';
 
 const ChatHeader = (props) => {
+    const navigation = useNavigation();
+    
     return(
         <>
         <Surface style={styles.container} elevation={1}>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('main-page')}
+            >
             <Image source={
                 props.image? props.image : defaultImage
             } style={styles.image} />
+            </TouchableOpacity>
 
             <View style={styles.containerCenter}>
                 <Text style={styles.contactName}>{props.contactName}</Text>
