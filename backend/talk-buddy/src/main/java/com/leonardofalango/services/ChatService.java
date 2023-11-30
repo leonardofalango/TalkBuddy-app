@@ -35,6 +35,6 @@ public class ChatService {
     public Chat findChat(String userId, String userId1) {
         System.out.println("findChat");
 
-        return chatRepository.findChatWithMembers(userId, userId1);
+        return chatRepository.findChatByMembers(userId, userId1);
     }
 }
