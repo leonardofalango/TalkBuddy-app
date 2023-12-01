@@ -1,48 +1,33 @@
 import axios from 'axios'
+const baseUrl = 'http://localhost:8080/chats'
 
 class ChatService
 {
-    // static token = AsyncStorage.getItem('token');
-    static getChat(chatID, token=null) {
-        // Just for testing
-        const chat = {
-            id: 1,
-            contactName: 'A Vida 🌷💓💍',
-            messages: [
-                {
-                    id: 1,
-                    isMine: 0,
-                    message: 'BOOOOMMMM DIA MINHA VIDAAAA',
-                    timestamp: '15:45'
-                },
-                {
-                    id: 2,
-                    isMine: 1,
-                    message: 'EU TE AMO EU TE AMO EU TE AMO',
-                    timestamp: '15:46'
-                },
-                {
-                    id: 3,
-                    isMine: 1,
-                    message: 'EU TE AMOOOOOOOOOOOOOOOOO!'
-                },
-            ]
-                
-        }
-        return chat
 
-
-        return axios.post('/api/chat/' + chatID, {}, {
+    static async createChat(token, userId1, userId2) {
+        return await axios.post(`${baseUrl}/createChat` + chatID, {
+            userId1,
+            userId2
+        }, {
             headers: {
-                token: 'bearer ' + token
+                "Authorization": 'Bearer ' + token
             }
         })
     }
 
-    static getChats(token) {
-        return axios.post('/api/chat', {}, {
+    static async findChat(token, userId1, userId2) {
+        return await axios.get(`${baseUrl}/find/${userId1}/${userId2}`, {}, {
             headers: {
-                token: 'bearer ' + token
+                "Authorization": 'Bearer ' + token
+            }
+        })
+    }
+
+    static async getChats(token, userId) {
+        console.log(`${baseUrl}/${userId}`)
+        return await axios.get(`${baseUrl}/${userId}`, {
+            headers: {
+                "Authorization": 'Bearer ' + token
             }
         })
     }

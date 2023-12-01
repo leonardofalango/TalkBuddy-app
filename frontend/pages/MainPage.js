@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Divider } from 'react-native-paper';
@@ -8,34 +8,31 @@ import { HeaderMain } from '../components/HeaderMain';
 import { globalStyle } from '../globalStyle';
 import { Modal, Portal, PaperProvider } from 'react-native-paper';
 import { ShowLastMessages } from '../components/ShowLastMessages';
+import { useSelector, useDispatch } from 'react-redux';
+import { userSlice } from '../redux/userSlice';
+import { ChatService } from '../services/ChatService';
 
 
 export default function MainPage({ navigation }) {
 
-    const [list, setList] = useState([
-        {
-            id: 1,
-            name: 'Não é o Falas',
-            number : '+55 98714-1533',
-            image: 'https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg',
-            lastMessage : 'Eu quero morrer!Eu quero morrer!Eu quero morrer!Eu quero morrer!Eu quero morrer!Eu quero morrer!Eu quero morrer!Eu quero morrer!',
-            isYourMessage: false,
-            lastmessageTime : '12:00',
-            isRead: false,
-            unreadMessages: 85,
-        },
-        {
-            id: 2,
-            name: 'Contato numero 2',
-            number : '+55 98849-3956',
-            image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.twinkl.co.uk%2Fparenting-wiki%2Fthird-person&psig=AOvVaw2bZhjp9ZiV80iuv87p764G&ust=1700680265207000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKjLgurl1YIDFQAAAAAdAAAAABAJ',
-            lastMessage : 'Falo manow, vou sim e vc?',
-            isYourMessage: true,
-            lastmessageTime : '16:14',
-            isRead: true,
-            unreadMessages: 0,
-        },
-    ])
+    const dispatch = useDispatch();
+    const { userChats } = useSelector(store => store.user);
+    const { setUserChats } = userSlice.actions;
+
+    const { token, userId } = useSelector(store => store.auth);
+
+    useEffect(() => {
+        async function getChats() {
+                const chats = await ChatService.getChats(token, userId) 
+                dispatch(setUserChats(chats.data))
+        }
+        getChats();
+    }, []);
+
+    useEffect(() => {
+        console.log(userChats);
+    }, [userChats]);
+
 
     const [visible, setVisible] = useState(false);
 
@@ -56,10 +53,10 @@ export default function MainPage({ navigation }) {
                 <Divider/>
                 
                 <FlatList
-                    data={list}
+                    data={userChats}
                     renderItem={({item, i}) => (
                         <TouchableOpacity
-                            onLongPress={showModal}
+                            onLongPress={ showModal }
                             onPress={() => navigation.navigate('chat', {idChat: item.id})}
                         >
                             <ContactComponent

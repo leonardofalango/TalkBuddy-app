@@ -25,23 +25,22 @@ export default function Login({ navigation }) {
     const dispatch = useDispatch();
     const { setAuth } = authSlice.actions;
 
-    const login = () => {
+    const login = async () => {
         const data = { email, password };
-        // console.log(data)
 
         LoginService.login(data)
             .then((response) => {
-                console.log(response);
+                console.log(response)
 
                 if (response.status == 200) {
-                    dispatch(setAuth(response.data.token));
-                    navigation.navigate('main-page');
+                    dispatch(setAuth({token:response.token, userId: response.userId}));
+
+                   navigation.navigate('main-page');
                 }
 
                 setErrorMessage('Invalid email or password!');
                 setShowError(true);
             })
-
             .catch((error) => {
                 setShowError(true);
                 console.log(error);
@@ -71,6 +70,7 @@ export default function Login({ navigation }) {
             <></>
         );
     }
+    
 
     return (
         <>
@@ -126,7 +126,7 @@ export default function Login({ navigation }) {
             <TouchableOpacity style={styles.button}
                 onPress={ login }    
             >
-                <>Login</>
+                <Text>Login</Text>
             </TouchableOpacity>
 
             

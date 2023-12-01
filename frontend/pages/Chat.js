@@ -7,8 +7,11 @@ import { ChatService } from '../services/ChatService'
 
 import { ReceivedMessage } from '../components/ReceivedMessage'
 import { SentMessage } from '../components/SentMessage'
+import { useSelector } from 'react-redux'
 
 const Chat = (props) => {
+    const { idUser } = useSelector(store => store.auth)
+
     const [chat, setChat] = useState({})
 
     const getChat = async () => {
@@ -18,7 +21,7 @@ const Chat = (props) => {
     }
 
     const renderMessage = (item) => {
-        if (item.isMine) {
+        if (item.senderId == idUser) {
             return (
                 <SentMessage
                     content={item.message}

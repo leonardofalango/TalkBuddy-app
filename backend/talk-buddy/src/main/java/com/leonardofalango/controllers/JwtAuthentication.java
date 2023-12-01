@@ -2,7 +2,6 @@ package com.leonardofalango.controllers;
 
 import java.util.List;
 
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leonardofalango.DTO.Response;
+import com.leonardofalango.DTO.Responses.Response;
+import com.leonardofalango.DTO.Responses.TokenResponse;
 import com.leonardofalango.model.UserModel;
 import com.leonardofalango.services.AuthenticateService;
 import com.leonardofalango.services.UserService;
@@ -29,18 +29,18 @@ public class JwtAuthentication {
     private AuthenticateService authService;
 
     @PostMapping("/login")
-    public Response login(@RequestBody UserModel user) throws AuthException {
+    public TokenResponse login(@RequestBody UserModel user) throws AuthException {
         String pass = DigestUtils.md5DigestAsHex(user.getPassword().getBytes()).toUpperCase();
 
         final
         List<UserModel> resp = this.userService.findByEmail(user.getEmail());
         if (resp.size() > 0) {
             if (resp.get(0).getPassword().equals(pass)) {
-                return authService.createToken(user);
+                return authService.createToken(resp.get(0));
             }
-            return new Response("Senha incorreta", 401);
+            return new TokenResponse(null, null, 401);
         }
-        return new Response("Usuário não encontrado", 404);
+        return new TokenResponse(null, null, 404);
     }
 
     @PostMapping("/validate")

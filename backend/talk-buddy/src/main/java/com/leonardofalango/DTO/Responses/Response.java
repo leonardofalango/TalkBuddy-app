@@ -1,4 +1,4 @@
-package com.leonardofalango.DTO;
+package com.leonardofalango.DTO.Responses;
 
 import lombok.Data;
 

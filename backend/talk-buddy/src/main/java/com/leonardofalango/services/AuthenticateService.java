@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.leonardofalango.DTO.Response;
+import com.leonardofalango.DTO.Responses.Response;
+import com.leonardofalango.DTO.Responses.TokenResponse;
 import com.leonardofalango.model.UserModel;
 
 import jakarta.security.auth.message.AuthException;
@@ -26,7 +27,7 @@ public class AuthenticateService implements UserDetailsService {
     @Value("${jwt.secret")
     private String secret;
 
-    public Response createToken(UserModel user) throws AuthException {
+    public TokenResponse createToken(UserModel user) throws AuthException {
         try {
 
             final var anAlgorithm = Algorithm.HMAC256(secret);
@@ -35,7 +36,7 @@ public class AuthenticateService implements UserDetailsService {
                     .withSubject(user.getEmail())
                     .withExpiresAt(new Date(new Date().getTime() + 24 * 60 * 60 * 1000))
                     .sign(anAlgorithm);
-            return new Response(aToken);
+            return new TokenResponse(aToken, user.getId());
 
         } catch (IllegalArgumentException e) {
             throw new AuthException(e.getMessage());
