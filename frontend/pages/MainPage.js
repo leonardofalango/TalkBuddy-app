@@ -62,7 +62,7 @@ export default function MainPage({ navigation }) {
         <PaperProvider>
 
         <Portal>
-            <Dialog visible={visibleDialog} onDismiss={createConversation}>
+            <Dialog visible={visibleDialog} onDismiss={hideDialog}>
                 <Dialog.Title>Nova conversa</Dialog.Title>
                 <Dialog.Content>
                 <TextInput

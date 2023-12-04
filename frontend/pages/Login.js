@@ -126,7 +126,7 @@ export default function Login({ navigation }) {
             <TouchableOpacity style={styles.button}
                 onPress={ login }    
             >
-                <Text>Login</Text>
+                <Text style={styles.loginText}>Login</Text>
             </TouchableOpacity>
 
             
@@ -177,5 +177,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: '80%',
         marginTop: 7
+    },
+    loginText: {
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+        textAlign: 'center'
     }
 });
