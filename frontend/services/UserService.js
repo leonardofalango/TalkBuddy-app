@@ -10,6 +10,15 @@ class UserService {
             }}
         )
     }
+
+    static findUserByEmail = async (token, email) => {
+        return await axios.get(
+            `${baseUrl}/username/${email}`,{
+            headers: {
+                "Authorization": 'Bearer ' + token
+            }}
+        )
+    }
 }
 
 export { UserService }

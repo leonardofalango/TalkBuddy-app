@@ -51,4 +51,11 @@ public class UserController {
         System.out.println("findUser");
         return userService.findById(idUser);
     }
+
+    @GetMapping("/username/{username}")
+    public UserModel findUserByUsername(@PathVariable String username) {
+        System.out.println("username findUser");
+        return userService.getByEmailOrName(username);
+    }
+
 }

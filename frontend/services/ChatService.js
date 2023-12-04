@@ -5,7 +5,7 @@ class ChatService
 {
 
     static async createChat(token, userId1, userId2) {
-        return await axios.post(`${baseUrl}/createChat` + chatID, {
+        return await axios.post(`${baseUrl}/createChat`, {
             userId1,
             userId2
         }, {

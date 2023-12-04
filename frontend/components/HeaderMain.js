@@ -1,18 +1,20 @@
 import { AppBarComponent } from "./Appbar"
 import { MySearchBar } from "./SearchBar"
-import { View } from 'react-native'
 import { StyleSheet, Text, TouchableOpacity } from "react-native-web"
 import { globalStyle } from "../globalStyle"
 
+import { View } from 'react-native';
 
-const HeaderMain = () => {
+const HeaderMain = (props) => {
+    
+
     return (
         <View style={{backgroundColor: 'var(--background-color)'}}>
         <View style={styles.header}>
             <AppBarComponent title='Talk-Buddy' />
             <MySearchBar />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.showDialog()}>
             <Text style={globalStyle.icon}>
                 Iniciar uma nova conversa
             </Text>
