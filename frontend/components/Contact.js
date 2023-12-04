@@ -2,9 +2,18 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 const defaultImage = require('../assets/talk_buddy_logo.png')
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import DoneIcon from '@mui/icons-material/Done';
+import { useSelector } from 'react-redux';
+import { UserService } from '../services/UserService';
+import { useEffect, useState } from 'react';
 
 const ContactComponent = ({props}) => {
-    
+
+    const { token, userId } = useSelector(store => store.auth);
+
+    const otherUser = props.usersId[0] == userId? props.usersId[1] : props.usersId[0]
+
+    const [contactName, setContactName] = useState('')
+
     const iconCheck = () => {
         if(props.isYourMessage){
             if(props.isRead){
@@ -22,7 +31,6 @@ const ContactComponent = ({props}) => {
     const unreadMessagesRender = () => {
         if(props.unreadMessages > 0){
             return(
-                
                 <View style={styles.unreadMessages}>
                     <Text style={styles.unreadMessagesText}>
                         {props.unreadMessages}
@@ -32,6 +40,14 @@ const ContactComponent = ({props}) => {
         }
     }
 
+    useEffect(() => {
+        async function getContact() {
+            const u = await UserService.findUser(token, otherUser);
+            setContactName(u.data.name);
+        }
+        getContact()
+    }, [])
+
     return (
         <View style={styles.container}>
             <Image source={
@@ -39,8 +55,10 @@ const ContactComponent = ({props}) => {
             } style={styles.image} />
 
             <View style={styles.containerCenter}>
-                <Text style={styles.contactName}>
-                    {props.name? props.name : props.number}
+                <Text style={styles.username}
+                    numberOfLines={1}
+                >
+                    {contactName}
                 </Text>
                 <View style={ styles.row }>
                     { iconCheck() }
@@ -127,6 +145,11 @@ const styles = StyleSheet.create({
     },
     icon: {
         color: 'var(--text-input-color)'
+    },
+    username : {
+        overflow: 'hidden',
+        display: 'web-kit-box',
+        lineClamp: '1'
     }
 })
 

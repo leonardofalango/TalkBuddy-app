@@ -29,11 +29,6 @@ export default function MainPage({ navigation }) {
         getChats();
     }, []);
 
-    useEffect(() => {
-        console.log(userChats);
-    }, [userChats]);
-
-
     const [visible, setVisible] = useState(false);
 
     const showModal = () => setVisible(true);
@@ -57,8 +52,12 @@ export default function MainPage({ navigation }) {
                     renderItem={({item, i}) => (
                         <TouchableOpacity
                             onLongPress={ showModal }
-                            onPress={() => navigation.navigate('chat', {idChat: item.id})}
+                            onPress={() => navigation.navigate('chat', {
+                                chatId: item.id,
+                                contactId: item.usersId[0] == userId? item.usersId[1] : item.usersId[0]
+                            })}
                         >
+                            {console.log(item)}
                             <ContactComponent
                                 props={item}
                             />

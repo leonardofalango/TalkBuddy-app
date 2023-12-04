@@ -1,5 +1,7 @@
 package com.leonardofalango.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +21,16 @@ public class MessageController {
     private MessageService messageService;
 
     @GetMapping("/{chatId}")
-    public Iterable<Message> getMessages(@PathVariable String chatId) {
-        return messageService.getMessages(chatId);
+    public List<Message> getMessages(@PathVariable String chatId) {
+        var m = messageService.getMessages(chatId);
+
+        // System.out.println("------------------------------");
+        // for (Message message : m) {
+        //     System.out.println(message.getMessage());
+        // }
+        // System.out.println("------------------------------");
+
+        return m;
     }
 
     @PostMapping("/{chatId}")

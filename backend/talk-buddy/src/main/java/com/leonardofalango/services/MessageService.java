@@ -1,5 +1,7 @@
 package com.leonardofalango.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +23,7 @@ public class MessageService {
         return messageRepository.save(message);
     }
 
-    public Iterable<Message> getMessages(String chatId) {
-        System.out.println("getMessages");
-
+    public List<Message> getMessages(String chatId) {
         return messageRepository.findByChatId(chatId);
     }
 }
