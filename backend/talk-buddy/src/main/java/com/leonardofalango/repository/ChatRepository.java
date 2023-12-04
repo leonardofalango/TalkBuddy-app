@@ -13,7 +13,7 @@ public interface ChatRepository extends MongoRepository<Chat, String> {
     @Query("{'usersId' : ?0}")
     List<Chat> findUserChats(String userId);
 
-    @Query("{$all: ['usersId1' : ?0, 'usersId2' : ?1}]")
+    @Query("{'usersId' : {$all: [?0, ?1] }}")
     Chat findChatWithMembers(String userId1, String userId2);
 
     @Query("{$in: ['usersId1' : ?0, 'usersId2' : ?1]}")

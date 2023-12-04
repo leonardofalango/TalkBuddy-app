@@ -20,6 +20,6 @@ public interface UserRepository extends MongoRepository<UserModel, String> {
     @Query("{'server' : ?0 }")
     List<UserModel> findByServer(Server server);
 
-    @Query("{ $or : [{ 'email' : /?0/ }, { 'name' : /?0/ } ] }")
+    @Query("{ $or : [{ 'email' : ?0 }, { 'name' : ?0 }, { 'number' : ?0}] }")
     List<UserModel> findByEmail(String email);
 }

@@ -17,11 +17,14 @@ public class ChatService {
         System.out.println("createChat");
         
         Chat chatInDb = chatRepository.findChatWithMembers(userId1, userId2);
-
+        
         if (chatInDb != null) {
+            System.out.println("Chat: ");
+            System.out.println(chatInDb.getId());
             return chatInDb;
         }
-
+        
+        System.out.println("Creating Chat: ");
         Chat chat = new Chat(new String[] { userId1, userId2 });
         return chatRepository.save(chat);
     }

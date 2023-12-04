@@ -97,7 +97,9 @@ public class UserService {
     }
 
     public UserModel getByEmailOrName(String emailOrName) {
-        return this.userRepository.findByEmail(emailOrName).get(0);
+        List<UserModel> users = this.userRepository.findByEmail(emailOrName);
+        
+        return users.get(0);
     }
 
     public List<UserModel> findByEmail(String email) {
